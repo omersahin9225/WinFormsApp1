@@ -48,6 +48,7 @@
             Controls.Add(button1);
             Name = "Snakes";
             Text = "Form1";
+            Resize += Snakes_Resize;
             ResumeLayout(false);
         }
 
