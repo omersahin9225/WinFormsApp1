@@ -35,6 +35,7 @@
             // 
             // panel1
             // 
+            panel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             panel1.BackColor = SystemColors.ButtonFace;
             panel1.Location = new Point(12, 12);
             panel1.Name = "panel1";
@@ -44,6 +45,7 @@
             // 
             // timer1
             // 
+            timer1.Interval = 500;
             timer1.Tick += timer1_Tick;
             // 
             // Snakes
@@ -55,6 +57,7 @@
             Controls.Add(panel1);
             Name = "Snakes";
             Text = "Form1";
+            KeyDown += Snakes_KeyDown;
             Resize += Snakes_Resize;
             ResumeLayout(false);
         }

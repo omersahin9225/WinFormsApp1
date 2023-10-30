@@ -17,12 +17,13 @@ namespace WinFormsApp1
         private void Snakes_Resize(object sender, EventArgs e)
         {
             int he = this.Height;
-            this.Height = (int)Math.Round((decimal)he / csize) * csize;
+            panel1.Height = (int)Math.Round((decimal)panel1.Height / csize) * csize;
 
-            this.Width = (int)Math.Round((decimal)this.Width / csize) * csize;
+            panel1.Width = (int)Math.Round((decimal)panel1.Width / csize) * csize;
 
         }
 
+        
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
             sSnakeHead = new Panel();
@@ -52,29 +53,51 @@ namespace WinFormsApp1
             else if (direction == "left")
             {
                 locX -= 10;
-                if (locY <= 390)
+                if (locX < 0)
                 {
-                    locX = Width - 10;
+                    locX = 390;
                 }
-            }else if (direction == "down")
+            }
+            else if (direction == "down")
             {
-                locY += 20;
-                if (locY >= Height)
+                locY += 10;
+                if (locY >= 390)
                 {
                     locY = 0;
                 }
-            }else if(direction == "up") 
+            }
+            else if (direction == "up")
             {
-                locY -= 20;
-                if(locY < 0) 
+                locY -= 10;
+                if (locY < 0)
                 {
-                    locY=Height - 20;
+                    locY = 390;
                 }
             }
             snakeBody[0].Location = new Point(locX, locY);
 
 
 
+        }
+
+        private void Snakes_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Right && direction != "left")
+            {
+                direction = "right";
+            }
+            if (e.KeyCode == Keys.Left && direction != "right")
+            {
+                direction = "left";
+            }
+            if (e.KeyCode == Keys.Up && direction != "down")
+            {
+                direction = "up";
+            }
+            if (e.KeyCode == Keys.Down && direction != "up")
+            {
+                direction = "down";
+            }
         }
     }
 }
