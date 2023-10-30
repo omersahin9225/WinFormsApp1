@@ -28,24 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
-            button1 = new Button();
+            panel1 = new Panel();
             SuspendLayout();
             // 
-            // button1
+            // panel1
             // 
-            button1.Location = new Point(23, 12);
-            button1.Name = "button1";
-            button1.Size = new Size(262, 128);
-            button1.TabIndex = 0;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
+            panel1.BackColor = SystemColors.ButtonFace;
+            panel1.Location = new Point(12, 12);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(401, 408);
+            panel1.TabIndex = 0;
+            panel1.Paint += panel1_Paint;
             // 
             // Snakes
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.ActiveCaption;
             ClientSize = new Size(800, 450);
-            Controls.Add(button1);
+            Controls.Add(panel1);
             Name = "Snakes";
             Text = "Form1";
             Resize += Snakes_Resize;
@@ -54,6 +55,6 @@
 
         #endregion
 
-        private Button button1;
+        private Panel panel1;
     }
 }
