@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             panel1 = new Panel();
+            timer1 = new System.Windows.Forms.Timer(components);
             SuspendLayout();
             // 
             // panel1
@@ -36,9 +38,13 @@
             panel1.BackColor = SystemColors.ButtonFace;
             panel1.Location = new Point(12, 12);
             panel1.Name = "panel1";
-            panel1.Size = new Size(401, 408);
+            panel1.Size = new Size(400, 400);
             panel1.TabIndex = 0;
             panel1.Paint += panel1_Paint;
+            // 
+            // timer1
+            // 
+            timer1.Tick += timer1_Tick;
             // 
             // Snakes
             // 
@@ -56,5 +62,6 @@
         #endregion
 
         private Panel panel1;
+        private System.Windows.Forms.Timer timer1;
     }
 }

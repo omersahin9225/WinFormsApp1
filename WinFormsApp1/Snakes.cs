@@ -26,11 +26,55 @@ namespace WinFormsApp1
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
             sSnakeHead = new Panel();
-            sSnakeHead.Location = new Point(200, 200);
-            sSnakeHead.Size = new Size(20, 20);
+            sSnakeHead.Location = new Point(200, 10);
+            sSnakeHead.Size = new Size(10, 10);
             sSnakeHead.BackColor = Color.Green;
             snakeBody.Add(sSnakeHead);
             panel1.Controls.Add(snakeBody[0]);
+
+            timer1.Start();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            int locX = snakeBody[0].Location.X;
+            int locY = snakeBody[0].Location.Y;
+
+            if (direction == "right")
+            {
+                locX += 10;
+                if (locX >= 390)
+                {
+                    locX = 0;
+                }
+
+            }
+            else if (direction == "left")
+            {
+                locX -= 10;
+                if (locY <= 390)
+                {
+                    locX = Width - 10;
+                }
+            }else if (direction == "down")
+            {
+                locY += 20;
+                if (locY >= Height)
+                {
+                    locY = 0;
+                }
+            }else if(direction == "up") 
+            {
+                locY -= 20;
+                if(locY < 0) 
+                {
+                    locY=Height - 20;
+                }
+            }
+            snakeBody[0].Location = new Point(locX, locY);
+
+
+
         }
     }
 }
