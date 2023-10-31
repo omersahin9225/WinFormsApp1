@@ -3,6 +3,8 @@ namespace WinFormsApp1
     public partial class Snakes : Form
     {
         private int csize = 10;
+        int ysize = 10;
+
 
 
 
@@ -10,7 +12,10 @@ namespace WinFormsApp1
         public Snakes()
         {
             InitializeComponent();
+            Bait();
         }
+        Random rnd = new Random();
+        Panel bait = new Panel();
         Panel sSnakeHead;
         List<Panel> snakeBody = new List<Panel>();
         string direction = "right";// start yönü
@@ -23,7 +28,7 @@ namespace WinFormsApp1
 
         }
 
-        
+
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
             sSnakeHead = new Panel();
@@ -40,6 +45,9 @@ namespace WinFormsApp1
         {
             int locX = snakeBody[0].Location.X;
             int locY = snakeBody[0].Location.Y;
+
+            BaitEat();
+            SnakeBodyMove();
 
             if (direction == "right")
             {
@@ -82,22 +90,59 @@ namespace WinFormsApp1
 
         private void Snakes_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Right && direction != "left")
+            if (e.KeyCode == Keys.Right )
             {
                 direction = "right";
             }
-            if (e.KeyCode == Keys.Left && direction != "right")
+            if (e.KeyCode == Keys.Left )
             {
                 direction = "left";
             }
-            if (e.KeyCode == Keys.Up && direction != "down")
+            if (e.KeyCode == Keys.Up )
             {
                 direction = "up";
             }
-            if (e.KeyCode == Keys.Down && direction != "up")
+            if (e.KeyCode == Keys.Down)
             {
                 direction = "down";
             }
         }
+        private void Bait()
+        {
+
+            bait.Size = new Size(10, 10);
+            bait.BackColor = Color.Red;
+            bait.Location = new Point(rnd.Next(0, panel1.Width / ysize) * ysize, rnd.Next(0, panel1.Height / ysize) * ysize);
+            panel1.Controls.Add(bait);
+
+        }
+        private void BaitEat()
+        {
+            if (snakeBody[0].Location == bait.Location)
+            {
+                panel1.Controls.Remove(bait);
+                Bait();
+                SnakeBodyAdd();
+            }
+
+        }
+        private void SnakeBodyAdd()
+        {
+            Panel snakeS = new Panel();
+            snakeS.Size = new Size(10, 10);
+            snakeS.BackColor = Color.Green;
+            snakeBody.Add(snakeS);
+            panel1.Controls.Add(snakeS);
+        }
+
+        private void SnakeBodyMove() 
+        {
+            for (int i = snakeBody.Count-1;i>0;i--)
+            {
+                snakeBody[i].Location = snakeBody[i - 1].Location;
+            }
+        }
+
+
     }
 }
