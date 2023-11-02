@@ -31,6 +31,7 @@
             components = new System.ComponentModel.Container();
             panel1 = new Panel();
             timer1 = new System.Windows.Forms.Timer(components);
+            label1 = new Label();
             SuspendLayout();
             // 
             // panel1
@@ -45,8 +46,17 @@
             // 
             // timer1
             // 
-            timer1.Interval = 500;
             timer1.Tick += timer1_Tick;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(587, 130);
+            label1.Name = "label1";
+            label1.Size = new Size(38, 15);
+            label1.TabIndex = 1;
+            label1.Text = "label1";
+            label1.Click += label1_Click;
             // 
             // Snakes
             // 
@@ -54,17 +64,20 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveCaption;
             ClientSize = new Size(800, 450);
+            Controls.Add(label1);
             Controls.Add(panel1);
             Name = "Snakes";
             Text = "Form1";
             KeyDown += Snakes_KeyDown;
             Resize += Snakes_Resize;
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
         private Panel panel1;
         private System.Windows.Forms.Timer timer1;
+        private Label label1;
     }
 }
