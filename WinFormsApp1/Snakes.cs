@@ -1,3 +1,5 @@
+using System.Drawing.Drawing2D;
+
 namespace WinFormsApp1
 {
     public partial class Snakes : Form
@@ -5,6 +7,9 @@ namespace WinFormsApp1
         private int csize = 10;
         int ysize = 10;
         int score = 0;
+        int snakeSpeed = 100; 
+        int movementCounter = 0;
+        int movementsPerInterval = 10000; 
 
 
 
@@ -14,7 +19,7 @@ namespace WinFormsApp1
         {
             InitializeComponent();
 
-
+            timer1.Interval = snakeSpeed;
             SnakeBodyMove();
         }
 
@@ -46,6 +51,7 @@ namespace WinFormsApp1
             sSnakeHead.Location = new Point(rnd.Next(0, panel1.Width / ysize) * ysize, rnd.Next(0, panel1.Height / ysize) * ysize);
             sSnakeHead.Size = new Size(10, 10);
             sSnakeHead.BackColor = Color.Green;
+
             snakeBody.Add(sSnakeHead);
             panel1.Controls.Add(snakeBody[0]);
             lblScore.Text = "0";
@@ -54,9 +60,21 @@ namespace WinFormsApp1
             Bait();
 
         }
+        private void UpdateGame(object sender, EventArgs e)
+        {
+            movementCounter++;
 
+            if (movementCounter >= movementsPerInterval)
+            {
+                SnakeBodyMove();
+                movementCounter = 2;
+           }
+        }
+    
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
+
+
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -66,6 +84,7 @@ namespace WinFormsApp1
 
             BaitEat();
             SnakeBodyMove();
+            UpdateGame(sender, e);
 
             //Impact();
 
@@ -125,19 +144,19 @@ namespace WinFormsApp1
 
         private void Snakes_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Right && direction != "Left")
+            if (e.KeyCode == Keys.Right && direction != "left")
             {
                 direction = "right";
             }
-            if (e.KeyCode == Keys.Left && direction != "Right")
+            if (e.KeyCode == Keys.Left && direction != "right")
             {
                 direction = "left";
             }
-            if (e.KeyCode == Keys.Up && direction != "Dowm")
+            if (e.KeyCode == Keys.Up && direction != "dowm")
             {
                 direction = "up";
             }
-            if (e.KeyCode == Keys.Down && direction != "Up")
+            if (e.KeyCode == Keys.Down && direction != "up")
             {
                 direction = "down";
             }
@@ -156,7 +175,15 @@ namespace WinFormsApp1
             if (snakeBody[0].Location == bait.Location)
             {
                 panel1.Controls.Remove(bait);
-                score += 10;
+                if (score < 100)
+                {
+                    score += 10;
+                }
+                else
+                {
+                    score += 20;
+                    timer1.Interval = 50;
+                }
                 lblScore.Text = score.ToString();
                 Bait();
                 SnakeBodyAdd();
@@ -190,27 +217,7 @@ namespace WinFormsApp1
             }
         }
 
-        // private void Impact()
-        // {
-        //  for (int i = 2; i < snakeBody.Count; i++)
-        //      {
-        //           if (snakeBody[0].Location == snakeBody[i].Location)
-        //        {
 
-        //              timer1.Stop();
-
-
-
-        //        }
-
-        //      }
-        //  }
-
-        //private void Reset()
-        //{
-        // snakeBody.Clear();
-        // panel1.Controls.Clear();
-        //}
 
 
     }
